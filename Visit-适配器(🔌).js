@@ -92,7 +92,7 @@ function chargeWithClassAdapter () {
   const adapter = new ClassAdapter() // 不再需要 slot
   const power = adapter.provideElectricity()
   const phone = new Phone('Oppo')
-  phone.charge(power) 
+  phone.charge(power)
 }
 
 chargeWithoutAdapt()
