@@ -1,9 +1,8 @@
 /* ---------------------------------------------------------------------------------------
-* about:迭代模式
+* about:组合模式
 * author:马兆铿（13790371603 810768333@qq.com）
 * date:2019-01-13
 * ---------------------------------------------------------------------------------------- */
-
 class PancakeHouseMenu {
   constructor () {
     this.list = [] // Array
@@ -13,6 +12,19 @@ class PancakeHouseMenu {
     this.list.push(new MenuItem(name, price))
   }
 
+  addSubMenu (subMenuName, { name, price }) {
+    const subMenu = this.list.find(item => item.name === subMenuName)
+    if (subMenu) {
+      subMenu.addItem(name, price)
+    }
+    // 不存在子菜单，就新增一个
+    else {
+      const subMenu = new SubMenu(subMenuName)
+      subMenu.addItem(name, price)
+      this.list.push(subMenu)
+    }
+  }
+
   getMenuList () {
     return this.list
   }
@@ -20,7 +32,23 @@ class PancakeHouseMenu {
   // 迭代器
   each (fn) {
     const list = this.getMenuList()
-    list.forEach((item, index) => fn(item, index))
+    // 分类型处理
+    list.forEach((item, index) => {
+      item instanceof SubMenu
+        ? item.each(fn) // 递归
+        : fn(item, index)
+    })
+  }
+}
+
+// 子菜单
+class SubMenu extends PancakeHouseMenu {
+  constructor (name) {
+    super()
+    Object.assign(this, {
+      name,
+      list: []
+    })
   }
 }
 
@@ -87,8 +115,13 @@ const dinnerHouseMenu = new DinnerHouseMenu()
 
 pancakeHouseMenu.addItem('pizza', 12)
 pancakeHouseMenu.addItem('waffle', 10)
+pancakeHouseMenu.addSubMenu('breakfast', { name: 'soup', price: 2 })
+pancakeHouseMenu.addSubMenu('breakfast', { name: 'soy milk', price: 1 })
+pancakeHouseMenu.addSubMenu('breakfast', { name: 'bread', price: 2 })
 dinnerHouseMenu.addItem('chicken', 50)
 dinnerHouseMenu.addItem('potato', 20)
+
+console.log(pancakeHouseMenu.getMenuList())
 
 const maidAlice = new Maid('Alice')
 
