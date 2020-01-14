@@ -67,9 +67,14 @@ class Maid {
   // 需要操作「每一项」
   printMenu () {
     Array.prototype.forEach.call(arguments, list => {
-      list.each(item=> {
-        console.log(`${item.getName()}: $${item.getPrice()}`)
-      })
+      this.printList(list)
+    })
+  }
+
+  printList (list) {
+    // 调用其迭代器
+    list.each(item => {
+      console.log(`${item.getName()}: $${item.getPrice()}`)
     })
   }
 }
