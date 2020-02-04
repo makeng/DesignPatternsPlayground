@@ -1,6 +1,6 @@
 # headFirst-designPatterns
 
-<img src="./img/what-does-it-do.gif" alt="img" style="zoom:50%;" />
+<img src="./img/what-does-it-do.gif" alt="img" style="zoom:40%;" />
 
 
 
