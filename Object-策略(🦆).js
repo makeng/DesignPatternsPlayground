@@ -3,30 +3,30 @@
 * author:马兆铿（810768333@qq.com）
 * date:2019-12-26
 * ----------------------------------------------------------------------------------*/
-
 class Duck {
-  flyBehavior () {
+  flyBehavior() {
+    // 方法的选择
     return {
       fly: () => '能飞',
       cantFly: () => '不能飞'
     }
   }
 
-  display () {
+  display() {
     return `看起来是${this.constructor.name}`
   }
 }
 
 /* ----------------------------------------- 子类 ----------------------------------------- */
 class RubberDuck extends Duck {
-  constructor () {
+  constructor() {
     super()
     this.fly = this.flyBehavior().cantFly
   }
 }
 
 class MuteDuck extends Duck {
-  constructor () {
+  constructor() {
     super()
     this.fly = this.flyBehavior().fly
   }
