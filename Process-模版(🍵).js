@@ -3,62 +3,60 @@
 * author:马兆铿（810768333@qq.com）
 * date:2019-1-13
 * ----------------------------------------------------------------------------------*/
-function log (x) {
-  console.log(x)
-}
+const {log} = console
 
 class CoffinBeverage {
-  prepareRecipe () {
+  prepareRecipe() {
     this.boilWater()
     this.brew() // 交给子类
     this.addCondiments() // 交给子类
     this.pourInCup()
   }
 
-  boilWater () {
+  boilWater() {
     log('boil water')
   }
 
-  pourInCup () {
+  pourInCup() {
     log('pour in cup')
   }
 }
 
 /* ----------------------------------------- 子类 ----------------------------------------- */
 class Coffee extends CoffinBeverage {
-  grewCoffeeGrinds () {
+  grewCoffeeGrinds() {
     log('grew coffee grinds')
   }
 
-  addSugarAndMilk () {
+  addSugarAndMilk() {
     log('add sugar and milk')
   }
 
   // 自定义方法
-  brew () {
+  brew() {
     this.grewCoffeeGrinds()
   }
 
-  addCondiments () {
+  addCondiments() {
     this.addSugarAndMilk()
   }
 }
 
 class Tea extends CoffinBeverage {
-  steepTeaBag () {
+  steepTeaBag() {
     log('steep tea bag')
   }
 
-  addLemon () {
+  addLemon() {
     log('add lemon')
   }
 
   // 自定义方法
-  brew () {
+  brew() {
     this.steepTeaBag()
   }
 
-  addCondiments () {
+  addCondiments() {
     this.addLemon()
   }
 }
