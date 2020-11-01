@@ -1,22 +1,22 @@
 /* ---------------------------------------------------------------------------------------
-* about:代理模式
+* about:代理模式。中间增加一个「保护/隐藏/远程发送」的过程对象，比如网络请求、DOM 接口、Proxy，来减少耦合并保护。
 * author:马兆铿（13790371603 810768333@qq.com）
 * date:2019-01-17
 * ---------------------------------------------------------------------------------------- */
-const log = console.log
+const {log} = console
 
 class Img {
-  constructor (url) {
+  constructor(url) {
     this.url = url
   }
 
-  paintIcon () {
+  paintIcon() {
     log(`<img src="${this.url} />"`)
   }
 }
 
 class ImgIcon {
-  paintIcon (url) {
+  paintIcon(url) {
     if (!url) {
       return 'Image is loading.'
     }
@@ -26,7 +26,7 @@ class ImgIcon {
 
 /* ----------------------------------------- 共用类 ----------------------------------------- */
 class ImgProxy {
-  paintIcon () {
+  paintIcon() {
     return Promise.resolve(
       'http://t8.baidu.com/it/u=1484500186,1503043093&fm=79&app=86&size=h300&n=0&g=4n&f=jpeg'
     )
