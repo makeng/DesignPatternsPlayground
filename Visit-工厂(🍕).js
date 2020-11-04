@@ -4,7 +4,7 @@
 * date:2020-01-02
 * ----------------------------------------------------------------------------------*/
 class PizzaStore {
-  orderPizza (type) {
+  orderPizza(type) {
     const pizza = new Pizza(type)
     pizza.prepare()
     pizza.bake()
@@ -13,51 +13,51 @@ class PizzaStore {
 }
 
 class Pizza {
-  constructor (type) {
+  constructor(type) {
     this.type = type
     this.name = type + ' pizza'
   }
 
-  prepare () {
+  prepare() {
     console.log(`Preparing ${this.name}`)
   }
 
-  bake () {
+  bake() {
     console.log(`Baking ${this.name}`)
   }
 }
 
 /* ----------------------------------------- 子类 ----------------------------------------- */
 class NYPizzaStore extends PizzaStore {
-  constructor () {
+  constructor() {
     super()
     this.address = 'NewYork city'
   }
 
-  deliver (pizza) {
+  deliver(pizza) {
     console.log(`Deliver ${pizza.name} to ${this.address}`)
   }
 }
 
 class ChicagoPizzaStore extends PizzaStore {
-  constructor () {
+  constructor() {
     super()
     this.address = 'Chicago city'
   }
 
-  deliver (pizza) {
+  deliver(pizza) {
     console.log(`Deliver ${pizza.name} to ${this.address}`)
   }
 }
 
 class NYStyleCheesePizza extends Pizza {
-  constructor () {
+  constructor() {
     super()
   }
 }
 
 class ChicagoStyleCheesePizza extends Pizza {
-  constructor () {
+  constructor() {
     super()
   }
 }
