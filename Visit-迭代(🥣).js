@@ -1,46 +1,46 @@
 /* ---------------------------------------------------------------------------------------
-* about:迭代模式
+* about:迭代器模式是一种行为设计模式， 让你能在不暴露集合底层表现形式 （列表、 栈和树等） 的情况下遍历集合中所有的元素。
 * author:马兆铿（13790371603 810768333@qq.com）
 * date:2019-01-13
 * ---------------------------------------------------------------------------------------- */
 
 class PancakeHouseMenu {
-  constructor () {
+  constructor() {
     this.list = [] // Array
   }
 
-  addItem (name, price) {
+  addItem(name, price) {
     this.list.push(new MenuItem(name, price))
   }
 
-  getMenuList () {
+  getMenuList() {
     return this.list
   }
 
   // 迭代器
-  each (fn) {
+  each(fn) {
     const list = this.getMenuList()
     list.forEach((item, index) => fn(item, index))
   }
 }
 
 class DinnerHouseMenu {
-  constructor () {
+  constructor() {
     this.list = {} // ArrayLike
     this.list.length = 0
   }
 
-  addItem (name, price) {
+  addItem(name, price) {
     this.list[this.list.length] = new MenuItem(name, price)
     this.list.length += 1
   }
 
-  getMenuList () {
+  getMenuList() {
     return this.list
   }
 
   // 迭代器
-  each (fn) {
+  each(fn) {
     const list = this.getMenuList()
     Array.prototype.forEach.call(list, (item, index) => fn(item, index))
   }
@@ -48,32 +48,32 @@ class DinnerHouseMenu {
 
 /* ----------------------------------------- 共用类 ----------------------------------------- */
 class MenuItem {
-  constructor (name, price) {
-    Object.assign(this, { name, price })
+  constructor(name, price) {
+    Object.assign(this, {name, price})
   }
 
-  getName () {
+  getName() {
     return this.name
   }
 
-  getPrice () {
+  getPrice() {
     return this.price
   }
 }
 
 class Maid {
-  constructor (name) {
+  constructor(name) {
     this.name = name
   }
 
   // 需要操作「每一项」
-  printMenu () {
+  printMenu() {
     Array.prototype.forEach.call(arguments, list => {
       this.printList(list)
     })
   }
 
-  printList (list) {
+  printList(list) {
     // 调用其迭代器
     list.each(item => {
       console.log(`${item.getName()}: $${item.getPrice()}`)
