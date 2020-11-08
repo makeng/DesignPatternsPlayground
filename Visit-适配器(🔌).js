@@ -1,24 +1,24 @@
 /* ---------------------------------------------------------------------------------------
-* about:适配器模式
+* about:适配器模式是一种结构型设计模式， 它能使接口不兼容的对象能够相互合作。
 * author:马兆铿（13790371603 810768333@qq.com）
 * date:2019-01-10
 * ---------------------------------------------------------------------------------------- */
 class Slot {
-  provideElectricity () {
+  provideElectricity() {
     return 220
   }
 }
 
 class Phone {
-  constructor (name) {
+  constructor(name) {
     this.name = name
   }
 
-  charge (input) {
+  charge(input) {
     console.log(`Phone ${this.name} plug in.`)
     let msg = 'Phone Not working.'
 
-    function isInRange (x) {
+    function isInRange(x) {
       return function (min, max) {
         return x >= min && x <= max
       }
@@ -36,11 +36,11 @@ class Phone {
 }
 
 class ObjectAdapter {
-  constructor (slot) {
+  constructor(slot) {
     this.slot = slot
   }
 
-  provideElectricity () {
+  provideElectricity() {
     const input = this.slot.provideElectricity()
     if (input > 200) {
       return 5
@@ -53,12 +53,12 @@ class ObjectAdapter {
 }
 
 class ClassAdapter extends Slot {
-  constructor () {
+  constructor() {
     super()
     this.super = Slot.prototype
   }
 
-  provideElectricity () {
+  provideElectricity() {
     const input = super.provideElectricity()
     if (input > 200) {
       return 5
@@ -71,7 +71,7 @@ class ClassAdapter extends Slot {
 }
 
 // 不适配
-function chargeWithoutAdapt () {
+function chargeWithoutAdapt() {
   const slot = new Slot()
   const phone = new Phone('Xiaomi')
   const power = slot.provideElectricity()
@@ -79,7 +79,7 @@ function chargeWithoutAdapt () {
 }
 
 // 对象适配
-function chargeWithObjectAdapter () {
+function chargeWithObjectAdapter() {
   const slot = new Slot()
   const adapter = new ObjectAdapter(slot)
   const power = adapter.provideElectricity()
@@ -88,7 +88,7 @@ function chargeWithObjectAdapter () {
 }
 
 // 类适配
-function chargeWithClassAdapter () {
+function chargeWithClassAdapter() {
   const adapter = new ClassAdapter() // 不再需要 slot
   const power = adapter.provideElectricity()
   const phone = new Phone('Oppo')
