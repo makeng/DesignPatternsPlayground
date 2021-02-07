@@ -50,18 +50,6 @@ class ChicagoPizzaStore extends PizzaStore {
   }
 }
 
-class NYStyleCheesePizza extends Pizza {
-  constructor() {
-    super()
-  }
-}
-
-class ChicagoStyleCheesePizza extends Pizza {
-  constructor() {
-    super()
-  }
-}
-
 
 /* ----------------------------------------- 实例 ----------------------------------------- */
 const nYPizzaStore = new NYPizzaStore() // 工厂方法：用子类 NYPizzaStore 来生产 pizza；抽象工厂：工厂类生成子类来生产。
