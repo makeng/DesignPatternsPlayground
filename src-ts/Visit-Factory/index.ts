@@ -1,3 +1,5 @@
+import * as types from './types'
+
 class Pizza {
   name: string
 
@@ -13,13 +15,7 @@ class Pizza {
   }
 }
 
-interface Store {
-  address: string
-  deliver (pizza: object): void
-  bake (pizza: object): void
-}
-
-class NYStore implements Store {
+class NYStore implements types.Store {
   address
 
   constructor (address) {
@@ -35,7 +31,7 @@ class NYStore implements Store {
   }
 }
 
-class ChicagoStore implements Store {
+class ChicagoStore implements types.Store {
   address
 
   constructor (address) {
