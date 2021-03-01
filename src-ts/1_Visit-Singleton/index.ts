@@ -1,49 +1,52 @@
 /*----------------------------------------------------------------------------------
-* about:单件模式。单例模式是一种创建型设计模式，让你能够保证一个类只有一个实例， 并提供一个访问该实例的全局节点。
-* author:马兆铿（810768333@qq.com）
-* date:2020-1-7
+* TS 的作用：
+* - 对静态实例和构造函数使用访问权限控制
 * ----------------------------------------------------------------------------------*/
 class ChocolateBoiler {
-  static instance = undefined
+  private static instance: ChocolateBoiler = undefined
+  empty: boolean = true
+  boiled: boolean = false
 
-  constructor() {
+  // 禁止外部使用构造函数
+  private constructor () {}
+
+  // 实例获取
+  static getInstance (): ChocolateBoiler {
     if (!ChocolateBoiler.instance) {
-      ChocolateBoiler.instance = this // 创建实例
-      this.empty = true
-      this.boiled = false
+      ChocolateBoiler.instance = new ChocolateBoiler()
     }
     return ChocolateBoiler.instance // 构造器返回的永远都是这个
   }
 
-// 外部调用方法
-  fill() {
+  // 外部调用方法
+  fill () {
     this.empty = !this.isEmpty()
   }
 
-  boil() {
+  boil () {
     this.boiled = !this.isEmpty() && !this.isBoiled()
   }
 
-  drain() {
+  drain () {
     this.empty = !this.isEmpty() && this.isBoiled()
   }
 
   // 内部方法
-  isEmpty() {
+  isEmpty (): boolean {
     return this.empty
   }
 
-  isBoiled() {
+  isBoiled (): boolean {
     return this.boiled
   }
 }
 
-const boiler = new ChocolateBoiler()
+const boiler = ChocolateBoiler.getInstance()
 boiler.fill()
 boiler.boil()
 boiler.drain()
 
-const boilerNew = new ChocolateBoiler()
+const boilerNew = ChocolateBoiler.getInstance()
 
 // 判断是否二者一致
 console.log(boiler.isEmpty(), boiler.isEmpty() === boilerNew.isEmpty() ? 'same' : 'error')
