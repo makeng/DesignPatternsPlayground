@@ -1,27 +1,31 @@
 /*----------------------------------------------------------------------------------
-* about:观察者模式是一种行为设计模式，允许你定义一种订阅机制，可在对象事件发生时通知多个 “观察” 该对象的其他对象。
-* author:马兆铿（810768333@qq.com）
-* date:2019-12-26
+* TS 的作用：
+* -
 * ----------------------------------------------------------------------------------*/
+
+const getRanNum = (): number => parseInt(String(Math.random() * Math.pow(10, 8)))
+
 /**
  * 构造函数：频道对象
  * @param name
  * @constructor
  */
 class PublishChannel {
-  static _fnList = []
+  protected static fnList = []
+  name: string
+  id: string
 
-  constructor (name) {
+  constructor (name: string) {
     this.name = name
-    this.id = `${parseInt(Math.random() * Math.pow(10, 8))}` // 随机 id
+    this.id = String(getRanNum())  // 随机 id
   }
 
   // 发送消息
-  postMessage (data) {
+  postMessage (data: any) {
     const evt = {
       data
     }
-    PublishChannel._fnList.forEach(item => {
+    PublishChannel.fnList.forEach(item => {
       if (
         item.name === this.name && // 同一频道
         item.id !== this.id // 自己不接收
@@ -32,8 +36,8 @@ class PublishChannel {
   }
 
   // 订阅函数
-  onmessage (fn) {
-    PublishChannel._fnList.push({
+  onmessage (fn: (evt: any) => void) {
+    PublishChannel.fnList.push({
       name: this.name,
       id: this.id,
       fn: fn.bind(this) // 回调指向频道实例，而不是push进去的对象
@@ -42,7 +46,7 @@ class PublishChannel {
 
   // 清除fnList相应id的对象，避免占用内存过多
   clear () {
-    PublishChannel._fnList = PublishChannel._fnList.filter(item => item.id !== this.id)
+    PublishChannel.fnList = PublishChannel.fnList.filter(item => item.id !== this.id)
   }
 }
 
@@ -58,7 +62,9 @@ const publisher2_2 = new PublishChannel(CHANNEL_2)
 const subscribe2 = new PublishChannel(CHANNEL_2)
 
 // 开始通信1
-subscribe1_1.foo = '用于鉴定接收作用域正确'
+Object.defineProperty(subscribe1_1, 'foo', {
+  value: '用于鉴定接收作用域正确'
+})
 subscribe1_1.onmessage(function (evt) {
   console.log(this)
   console.log('作用域是否正确:', this.foo !== undefined)
