@@ -5,7 +5,7 @@
 # ✏️ Todo
 
 - [x] JS 实现
-- [ ] Typescript 实现（进行中...）
+- [x] Typescript 实现
 
 
 
