@@ -5,7 +5,7 @@
 const { log } = console
 
 // 状态
-enum STATE {
+const enum STATE {
   HAS_QUARTER,
   NO_QUARTER,
   SOLD,

@@ -5,7 +5,9 @@
 # ✏️ Todo
 
 - [x] JS 实现
-- [x] Typescript 实现
+- [ ] Typescript 实现
+    - [x] 简单应用
+    - [ ] 高级用法
 
 
 
