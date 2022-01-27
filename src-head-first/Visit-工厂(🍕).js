@@ -14,7 +14,6 @@ class PizzaStore {
 
 class Pizza {
   constructor(type) {
-    this.type = type
     this.name = type + ' pizza'
   }
 
