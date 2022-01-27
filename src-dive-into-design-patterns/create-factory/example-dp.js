@@ -1,4 +1,4 @@
-import { TeaStation } from './classes.js'
+import { TeaStation } from './common.js'
 
 // 制造茶店的工厂
 function createStation(address) {

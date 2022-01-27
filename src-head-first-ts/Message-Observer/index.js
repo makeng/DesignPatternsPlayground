@@ -55,25 +55,25 @@ var subscribe2 = new PublishChannel(CHANNEL_2);
 Object.defineProperty(subscribe1_1, 'foo', {
     value: '用于鉴定接收作用域正确'
 });
-subscribe1_1.onmessage(function (evt) {
+subscribe1_1.subscribe(function (evt) {
     console.log(this);
     console.log('作用域是否正确:', this.foo !== undefined);
     console.log('订阅者1_1收到啦', evt);
 });
-subscribe1_2.onmessage(function (evt) {
+subscribe1_2.subscribe(function (evt) {
     console.log('订阅者1_2收到啦', evt);
 });
-publisher1.onmessage(function (evt) {
+publisher1.subscribe(function (evt) {
     console.log('发布者1不应该收到自己发出的', evt);
 });
-publisher1.postMessage('hello');
+publisher1.update('hello');
 // 开始通信2
-subscribe2.onmessage(function (evt) {
+subscribe2.subscribe(function (evt) {
     console.log('订阅者2第一次收到啦', evt);
 });
-subscribe2.onmessage(function (evt) {
+subscribe2.subscribe(function (evt) {
     console.log('订阅者2第二次收到啦', evt);
 });
-publisher2_1.postMessage('hello1');
-publisher2_2.postMessage('hello2');
+publisher2_1.update('hello1');
+publisher2_2.update('hello2');
 //# sourceMappingURL=index.js.map

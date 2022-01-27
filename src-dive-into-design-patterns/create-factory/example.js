@@ -1,4 +1,4 @@
-import { TeaStation } from './classes.js'
+import { TeaStation } from './common.js'
 
 const stationChina = new TeaStation('中国')
 const stationAmerica = new TeaStation('美国')
