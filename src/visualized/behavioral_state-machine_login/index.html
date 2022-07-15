@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<link rel="stylesheet" type="text/css" href="./index.css">
+<body>
+<ul class="state-machine">
+	<li>Not logged</li>
+	<li>Logining</li>
+	<li>Success</li>
+	<li>Fail</li>
+</ul>
+<div class="login-box">
+	<h2>Login</h2>
+	<form>
+		<div class="user-box">
+			<input type="text" name="" required="" value="Ken">
+			<label>Username</label>
+		</div>
+		<div class="user-box">
+			<input type="password" name="" required="" value="12345678">
+			<label>Password</label>
+		</div>
+		<a href="#" onclick="login.start()">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			Submit
+		</a>
+	</form>
+</div>
+<script src="https://lib.baomitu.com/zepto/latest/zepto.js"></script>
+<script>
+  function setStateActive(index) {
+    $stateList = $('.state-machine').children('li')
+    $targetState = $stateList.eq(index)
+
+    $stateList.removeClass('active')
+    $targetState.addClass('active')
+  }
+  const wait = (time) => new Promise(resolve => setTimeout(resolve, time))
+
+  // state machine
+  const LOGIN_STATE = {
+    NOT_LOGGED: 0,
+    LOGINING: 1,
+    SUCCESS: 2,
+    FAIL: 3,
+  }
+  const login = {
+    state: LOGIN_STATE.NOT_LOGGED,
+    start() {
+      $username = $('.user-box').find('input')
+
+      const request = () => {
+        this.state = LOGIN_STATE.LOGINING
+        wait(1000).then(() => success())
+      }
+      const success = () => {
+        this.state = LOGIN_STATE.SUCCESS
+        $username.val('')
+      }
+      const fail = () => {
+        this.state = LOGIN_STATE.FAIL
+      }
+      const reset = () => {
+        this.state = LOGIN_STATE.NOT_LOGGED
+        $username.val('New user please')
+      }
+
+      const fn = {
+        [LOGIN_STATE.NOT_LOGGED]: request,
+        [LOGIN_STATE.LOGINING]: () => {},
+        [LOGIN_STATE.SUCCESS]: fail,
+        [LOGIN_STATE.FAIL]: reset
+      }[this.state]
+      return fn()
+    }
+  }
+  // only to lighten the ui
+  const switchStatus = () => setStateActive(login.state)
+  setInterval(switchStatus, 500)
+</script>
+</body>
+</html>
