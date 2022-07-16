@@ -3,7 +3,7 @@
 * author:马兆铿（810768333@qq.com）
 * date:2020-1-14
 * ----------------------------------------------------------------------------------*/
-const {log} = console
+const { log } = console
 
 // 状态
 const STATE_HAS_QUARTER = 'STATE_HAS_QUARTER'
@@ -22,10 +22,10 @@ class CandyMachine {
   _setState(state) {
     this.state = state
     const fn = {
-      STATE_NO_QUARTER: () => this._noQuarter(),
-      STATE_HAS_QUARTER: () => this._hasQuarter(),
-      STATE_SOLD: () => this._sold(),
-      STATE_SOLD_OUT: () => this._soldOut()
+      [STATE_NO_QUARTER]: () => this._noQuarter(),
+      [STATE_HAS_QUARTER]: () => this._hasQuarter(),
+      [STATE_SOLD]: () => this._sold(),
+      [STATE_SOLD_OUT]: () => this._soldOut()
     }[state]
     fn()
   }
