@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<link rel="stylesheet" type="text/css" href="./index.css">
+<body>
+<div class="login-box">
+	<h2 class="box">Login</h2>
+	<form>
+		<div class="user-box box">
+			<input type="text" name="" required="" value="Ken">
+			<label>Username</label>
+		</div>
+		<div class="user-box box">
+			<input type="password" name="" required="" value="12345678">
+			<label>Password</label>
+		</div>
+		<button href="#" onclick="login.start()" class="box">
+			<span></span>
+			<span></span>
+			<span></span>
+			<span></span>
+			Submit
+		</button>
+	</form>
+</div>
+<script src="https://lib.baomitu.com/zepto/latest/zepto.js"></script>
+<script>
+  function createDiv(index) {
+    $divList = $('.box')
+    $div = $divList.eq(index)
+    $div.removeClass('box')
+  }
+  function wait(delay) {
+    return new Promise(resolve => {
+      setTimeout(resolve, delay)
+    })
+  }
+
+  class Box {
+    setTitle() {
+      createDiv(0)
+      return this
+    }
+    setUsername() {
+      createDiv(0)
+      return this
+    }
+    setPassword() {
+      createDiv(0)
+      return this
+    }
+    setButton() {
+      createDiv(0)
+      return this
+    }
+  }
+
+  const box = new Box()
+  function createDelaySetter(fn) {
+    return () => wait(1000).then(fn)
+  }
+
+  const promiseChain = Promise.resolve()
+    .then(createDelaySetter(box.setTitle))
+    .then(createDelaySetter(box.setUsername))
+    .then(createDelaySetter(box.setPassword))
+    .then(createDelaySetter(box.setButton))
+
+  promiseChain()
+</script>
+</body>
+</html>
